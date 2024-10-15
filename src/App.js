@@ -1,13 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState ,useEffect} from 'react';
 import JobForm from './components/JobForm';
 import JobList from './components/JobList';
+import JobDashboard from './components/JobDashboard';
+import Header from './components/Header';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 function App() {
   const [jobs, setJobs] = useState([]);
 
   const addJob = (job) => {
-    setJobs([...jobs, job]);
+    const updatedJobs = [...jobs, job];
+    setJobs(updatedJobs);
+    localStorage.setItem('jobs', JSON.stringify(updatedJobs)); // Save to local storage
   };
+
+  useEffect(() => {
+    const storedJobs = JSON.parse(localStorage.getItem('jobs')) || [];
+    setJobs(storedJobs);
+  }, []);
+  
+  
 
   const updateJobStatus = (index, newStatus) => {
     const updatedJobs = jobs.map((job, i) => 
@@ -22,11 +34,21 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 p-4">
-      <h1 className="text-3xl font-bold text-center mb-8">JobLog : Your career, your progress—tracked effortlessly.</h1>
-      <JobForm addJob={addJob} />
-      <JobList jobs={jobs} updateJobStatus={updateJobStatus} deleteJob={deleteJob} />
-    </div>
+    <Router>
+      <Header />
+      <div className="App">
+        <Routes>
+          {/* Route for Add Job */}
+          <Route path="/" element={<JobForm addJob={addJob} />} />
+
+          {/* Route for Job List */}
+          <Route path="/list" element={<JobList jobs={jobs} updateJobStatus={updateJobStatus} deleteJob={deleteJob} />} />
+
+          {/* Route for Dashboard */}
+          <Route path="/dashboard" element={<JobDashboard jobs={jobs} />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
