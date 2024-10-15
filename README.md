@@ -1,3 +1,24 @@
+# JOBLOG : Job Application Tracker
+
+A simple web application for tracking job applications, helping you manage your job search process efficiently. This application allows users to add, update, and delete job applications, view application statuses, and sort applications by date.
+
+## Features
+
+- Add job applications with details like company name, position, date applied, status, and application link.
+- Update the status of job applications (e.g., Applied, Interview, Offer, Rejected).
+- Delete job applications from the list.
+- Sort applications by date applied (Most Recent or Last Week).
+- Search functionality to find specific job applications quickly.
+- Responsive design for a better user experience on different devices.
+
+## Technologies Used
+
+- **React**: JavaScript library for building user interfaces.
+- **Tailwind CSS**: Utility-first CSS framework for styling the application.
+- **JavaScript ES6+**: Modern JavaScript features for cleaner and more efficient code.
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
